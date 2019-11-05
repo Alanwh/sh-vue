@@ -20,14 +20,31 @@ npm run build:tbs
 npm run build:lego
 ```
 
-### 代码风格
+### 代码规范
 * 基于 eslint standard 标准
 * 所以的vue组件名首字母必须大写
-
-
-
+* 严禁使用 jquery
 
 ### 文件结构
-aps-vue |
-tbs-vue |
-lego-vue|
+<table>
+  <thead>
+    <tr>
+      <td>文件夹</td>
+      <td>作用</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>aps-vue</td>
+      <td>aps 项目前端代码库</td>
+    </tr>
+    <tr>
+      <td>tbs-vue</td>
+      <td>tbs 项目前端代码库</td>
+    </tr>
+    <tr>
+      <td>lego-vue</td>
+      <td>lego 项目前端代码库</td>
+    </tr>
+  </tbody>
+</table>
