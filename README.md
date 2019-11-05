@@ -26,7 +26,7 @@ npm run build:lego
 * 严禁使用 jquery
 
 ### 文件结构
-<table>
+<table width='100%'>
   <thead>
     <tr>
       <td>文件夹</td>
@@ -45,6 +45,22 @@ npm run build:lego
     <tr>
       <td>lego-vue</td>
       <td>lego 项目前端代码库</td>
+    </tr>
+    <tr>
+      <td>common</td>
+      <td>前端通用组件/工具函数</td>
+    </tr>
+    <tr>
+      <td>conf</td>
+      <td>webpack 配置抽离</td>
+    </tr>
+    <tr>
+      <td>mock</td>
+      <td>mock 数据模块</td>
+    </tr>
+    <tr>
+      <td>dist</td>
+      <td>最终编译文件， 按项目目录区分</td>
     </tr>
   </tbody>
 </table>
