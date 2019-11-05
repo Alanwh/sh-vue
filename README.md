@@ -22,7 +22,6 @@ npm run build:lego
 
 ### 代码规范
 * 基于 eslint standard 标准
-* 所以的vue组件名首字母必须大写
 * 严禁使用 jquery
 
 ### 文件结构

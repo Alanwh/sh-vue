@@ -3,6 +3,7 @@
 /**
  * @param {string} url
  * @returns {Object}
+ * hwjun 2019/11/05
  */
 export function param2Obj(url) {
   const search = url.split('?')[1]
@@ -25,6 +26,7 @@ export function param2Obj(url) {
  * @param {number} wait
  * @param {boolean} immediate
  * @return {*}
+ * hwjun 2019/11/05
  */
 export function debounce(func, wait, immediate) {
   let timeout, args, context, timestamp, result
@@ -66,6 +68,7 @@ export function debounce(func, wait, immediate) {
  * @param {(Object|string|number)} time
  * @param {string} cFormat
  * @returns {string}
+ * hwjun 2019/11/05
  * 
  * 对Date的扩展，将 Date 转化为指定格式的String * 月(M)、日(d)、12小时(h)、24小时(H)、分(m)、秒(s)、周(E)、季度(q)
  * 可以用 1-2 个占位符 * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) * eg: * (new
@@ -113,7 +116,10 @@ export function parseTime(time, cFormat) {
   return time_str
 }
 
-// 设置本地缓存
+/**
+ * 设置本地缓存
+ * hwjun 2019/11/05  
+ */
 export function SetStorage(key, value, time) {
   try {
     time = time || 0
@@ -171,7 +177,10 @@ export function ClearCache(storage) {
   }
 }
 
-// 深 clone
+/**
+ * 深 clone
+ * hwjun 2019/11/05 
+ */ 
 export function deepCopy(obj) {
   var result = Array.isArray(obj) ? [] : {}
   for (var key in obj) {
@@ -186,7 +195,10 @@ export function deepCopy(obj) {
   return result
 }
 
-// 自动生成唯一 uuid
+/**
+ * 自动生成唯一 uuid
+ * hwjun 2019/11/05 
+ */ 
 export function getsingleId() {
   return new Date().getTime() + Math.random().toString(32).substr(2)
 }
@@ -194,6 +206,7 @@ export function getsingleId() {
 /**
  * @param {Array} array
  * @param {String} type 去重字段
+ * hwjun 2019/11/05 
  */
 export function unique(array, type) {
   const newArr = []
