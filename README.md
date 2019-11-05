@@ -26,7 +26,7 @@ npm run build:lego
 * 严禁使用 jquery
 
 ### 文件结构
-<table width='100%'>
+<table style="width:800px; margin: 0 auto;">
   <thead>
     <tr>
       <td>文件夹</td>
