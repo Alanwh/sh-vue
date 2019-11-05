@@ -1,5 +1,11 @@
-const constant = require('./constant');
+const chainWebpack = require('./chainwebpack');
+const devServer = require('./devserver');
+const configure = require('./configure');
+const htmls = require('./htmls');
 
 module.exports = {
-  constant
+  chainWebpack,
+  devServer,
+  configure,
+  htmls
 }
