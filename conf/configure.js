@@ -8,6 +8,10 @@ module.exports = (PROJECT) => {
       alias: {
         '@': resolve(`${PROJECT}-vue/`)
       }
+    },
+    output: {
+      // filename: '[name].[hash].js',
+      chunkFilename: 'js/[name].[hash].js'
     }
   }
 }
