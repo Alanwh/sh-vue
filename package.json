@@ -1,0 +1,44 @@
+{
+  "name": "sh-vue",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev:aps": "cross-env NODE_ENV=development:aps vue-cli-service serve ",
+    "build:aps": "cross-env NODE_ENV=production:aps vue-cli-service build",
+    "dev:lego": "cross-env NODE_ENV=development:lego vue-cli-service serve ",
+    "build:lego": "cross-env NODE_ENV=production:lego vue-cli-service build",
+    "dev:tbs": "cross-env NODE_ENV=development:tbs vue-cli-service serve ",
+    "build:tbs": "cross-env NODE_ENV=production:tbs vue-cli-service build"
+  },
+  "dependencies": {
+    "core-js": "^3.3.2",
+    "vue": "^2.6.10",
+    "vue-router": "^3.1.3",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.0.0",
+    "@vue/cli-plugin-eslint": "^4.0.0",
+    "@vue/cli-plugin-router": "^4.0.0",
+    "@vue/cli-plugin-vuex": "^4.0.0",
+    "@vue/cli-service": "^4.0.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "babel-eslint": "^10.0.3",
+    "cross-env": "^6.0.3",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "lint-staged": "^9.4.2",
+    "sass": "^1.19.0",
+    "sass-loader": "^8.0.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
+}
