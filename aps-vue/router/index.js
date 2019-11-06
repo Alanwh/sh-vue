@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import abnormalLivingBody from '../views/abnormal_living_body'
+import abnormalLivingBody from '../views/abnormal_face'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/abnormal_living_body',
-    name: 'Abnormal_Living_Body',
+    path: '/abnormal_face',
+    name: 'Abnormal_face',
     component: abnormalLivingBody
   },
   {

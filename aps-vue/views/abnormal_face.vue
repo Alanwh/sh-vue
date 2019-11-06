@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="wrapper">
     <el-row>
       <el-card>
         <!-- search -->
@@ -37,7 +37,7 @@
           </el-table-column>
           <el-table-column align="left" label="操作" width="100">
             <template slot-scope="scope">
-              <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              <el-button size="mini" type="danger" @click="handleRetry(scope.$index, scope.row)">重试</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -71,7 +71,8 @@ export default {
   },
   methods: {
     searchByFilter () {
-      console.log(this.searchFilter)
+      this.page = 1
+      this.getList()
     },
     clearFilter () {
       this.searchFilter.orderNo = ''
@@ -79,10 +80,31 @@ export default {
       this.searchFilter.tranNo = ''
     },
     getList () {
-      this.$http({
-        url: '/aps/face/queryOrderFaceDownFailList',
-        methods: 'GET'
-      }).then(this.handleListData)
+      this.tableLoading = true
+      this.searchFilter.pageIndex = this.page
+      this.$http
+        .get('/aps/face/queryOrderFaceDownFailList', { params: this.searchFilter })
+        .then(this.handleListData)
+    },
+    handleRetry (index, { orderFaceType, orderNo }) {
+      this.$http
+        .post('/aps/face/resetOrderFaceDownCount', { orderFaceType, orderNo })
+        .then(
+          result => {
+            if (result.flag === 'S') {
+              this.getList()
+              this.$message({
+                message: '重试成功！',
+                type: 'success'
+              })
+            }
+          },
+          error => {
+            this.$message({
+              message: error.message,
+              type: 'warning'
+            })
+          })
     },
     handleListData ({ flag, data }) {
       if (flag === 'S' && data) {
@@ -90,9 +112,6 @@ export default {
         this.total = data.total
         this.tableLoading = false
       }
-    },
-    handleDelete () {
-      console.log('delete~~~')
     }
   },
   mounted () {
