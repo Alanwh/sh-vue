@@ -6,7 +6,8 @@ module.exports = (PROJECT) => {
     // devtool: 'source-map',
     resolve: {
       alias: {
-        '@': resolve(`${PROJECT}-vue/`)
+        '@': resolve(`${PROJECT}-vue/`),
+        'common': resolve('../common')
       }
     },
     output: {

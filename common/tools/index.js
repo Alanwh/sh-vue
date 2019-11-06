@@ -1,11 +1,8 @@
-
-
 /**
  * @param {string} url
  * @returns {Object}
- * hwjun 2019/11/05
  */
-export function param2Obj(url) {
+export function param2Obj (url) {
   const search = url.split('?')[1]
   if (!search) {
     return {}
@@ -26,12 +23,11 @@ export function param2Obj(url) {
  * @param {number} wait
  * @param {boolean} immediate
  * @return {*}
- * hwjun 2019/11/05
  */
-export function debounce(func, wait, immediate) {
+export function debounce (func, wait, immediate) {
   let timeout, args, context, timestamp, result
 
-  const later = function() {
+  const later = function () {
     // 据上一次触发时间间隔
     const last = +new Date() - timestamp
 
@@ -48,7 +44,7 @@ export function debounce(func, wait, immediate) {
     }
   }
 
-  return function(...args) {
+  return function (...args) {
     context = this
     timestamp = +new Date()
     const callNow = immediate && !timeout
@@ -68,8 +64,6 @@ export function debounce(func, wait, immediate) {
  * @param {(Object|string|number)} time
  * @param {string} cFormat
  * @returns {string}
- * hwjun 2019/11/05
- * 
  * 对Date的扩展，将 Date 转化为指定格式的String * 月(M)、日(d)、12小时(h)、24小时(H)、分(m)、秒(s)、周(E)、季度(q)
  * 可以用 1-2 个占位符 * 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字) * eg: * (new
  * Date()).format("yyyy-MM-dd hh:mm:ss.S")==> 2006-07-02 08:09:04.423
@@ -78,11 +72,11 @@ export function debounce(func, wait, immediate) {
  * (new Date()).format("yyyy-MM-dd EEE hh:mm:ss") ==> 2009-03-10 星期二 08:09:04
  * (new Date()).format("yyyy-M-d h:m:s.S") ==> 2006-7-2 8:9:4.18
  */
-export function parseTime(time, cFormat) {
+export function parseTime (time, cFormat) {
   if (arguments.length === 0) {
     return null
   }
-  const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}'
+  const format = cFormat || '{y}-{m}-{d} {h}:{m}:{s}'
   let date
   if (typeof time === 'object') {
     date = time
@@ -104,7 +98,7 @@ export function parseTime(time, cFormat) {
     s: date.getSeconds(),
     a: date.getDay()
   }
-  const time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
+  const timeStr = format.replace(/{(y|m|d|h|i|s|a)+}/g, (result, key) => {
     let value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
     if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value] }
@@ -113,14 +107,13 @@ export function parseTime(time, cFormat) {
     }
     return value || 0
   })
-  return time_str
+  return timeStr
 }
 
 /**
  * 设置本地缓存
- * hwjun 2019/11/05  
  */
-export function SetStorage(key, value, time) {
+export function SetStorage (key, value, time) {
   try {
     time = time || 0
     localStorage.setItem(key, value)
@@ -138,7 +131,7 @@ export function SetStorage(key, value, time) {
     console.log(ex)
   }
 }
-export function GetStorage(key) {
+export function GetStorage (key) {
   var value = ''
   try {
     value = localStorage.getItem(key)
@@ -162,13 +155,13 @@ export function GetStorage(key) {
   }
   return !value ? '' : value
 }
-export function ClearCache(storage) {
+export function ClearCache (storage) {
   try {
     if (!window.localStorage) {
       return
     }
     for (const key in window.localStorage) {
-      if (key.indexOf(storage) != -1) {
+      if (key.indexOf(storage) !== -1) {
         localStorage.removeItem(key)
       }
     }
@@ -179,9 +172,8 @@ export function ClearCache(storage) {
 
 /**
  * 深 clone
- * hwjun 2019/11/05 
- */ 
-export function deepCopy(obj) {
+ */
+export function deepCopy (obj) {
   var result = Array.isArray(obj) ? [] : {}
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
@@ -197,25 +189,23 @@ export function deepCopy(obj) {
 
 /**
  * 自动生成唯一 uuid
- * hwjun 2019/11/05 
- */ 
-export function getsingleId() {
+ */
+export function getsingleId () {
   return new Date().getTime() + Math.random().toString(32).substr(2)
 }
 
 /**
  * @param {Array} array
  * @param {String} type 去重字段
- * hwjun 2019/11/05 
  */
-export function unique(array, type) {
+export function unique (array, type) {
   const newArr = []
   array.forEach((val, index) => {
     if (index === 0) {
       newArr.push(val)
     } else {
       const list = newArr.filter(item => {
-        return item[type] == val[type]
+        return item[type] === val[type]
       })
       if (!list.length) {
         newArr.push(val)

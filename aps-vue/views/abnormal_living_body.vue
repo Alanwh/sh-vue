@@ -4,14 +4,14 @@
       <el-card>
         <!-- search -->
         <el-form label-width="120px" :inline="true">
-          <el-form-item label="用户名">
-            <el-input v-model="searchFilter.usrName" style="width:200px" placeholder="请输入用户名"></el-input>
+          <el-form-item label="用户号">
+            <el-input v-model="searchFilter.userNo" style="width:200px" placeholder="请输入用户名"></el-input>
           </el-form-item>
           <el-form-item label="订单号">
-            <el-input v-model="searchFilter.orderId" placeholder="请输入订单号"></el-input>
+            <el-input v-model="searchFilter.orderNo" placeholder="请输入订单号"></el-input>
           </el-form-item>
           <el-form-item label="交易流水号">
-            <el-input v-model="searchFilter.serialNumber" placeholder="请输入交易流水号"></el-input>
+            <el-input v-model="searchFilter.tranNo" placeholder="请输入交易流水号"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="searchByFilter()">查询</el-button>
@@ -21,17 +21,21 @@
 
         <!-- table -->
         <el-table v-loading="tableLoading" :data="tableData" border class="table">
-          <el-table-column prop="activeNameOuter" label="用户号" align="center" width="120"></el-table-column>
-          <el-table-column prop="effectStartTime" align="center" label="订单号"></el-table-column>
-          <el-table-column prop="effectEndTime" align="center" label="交易流水号"></el-table-column>
-          <el-table-column prop="goodsCount" align="center" label="活体类型"></el-table-column>
-          <el-table-column prop="activeBannerLabel" align="center"   label="图片地址"></el-table-column>
-          <el-table-column prop="activityStatus" align="center" label="图片MongodbID"></el-table-column>
-          <el-table-column prop="activityStatus" align="center" label="活体合作方"></el-table-column>
-          <el-table-column prop="activityStatus" align="center" label="上送状态"></el-table-column>
-          <el-table-column prop="activityStatus" align="center" label="上送失败次数"></el-table-column>
-          <el-table-column prop="activityStatus" align="center" label="创建时间"></el-table-column>
-          <el-table-column align="left" width="300" label="操作">
+          <el-table-column prop="userNo" label="用户号" align="center" width="120"></el-table-column>
+          <el-table-column prop="orderNo" align="center" label="订单号"></el-table-column>
+          <el-table-column prop="tranNo" align="center" width="100" label="交易流水号"></el-table-column>
+          <el-table-column prop="orderFaceType" align="center" width="78" label="活体类型"></el-table-column>
+          <el-table-column prop="facePhotoAssay[0]" align="center" width="180" label="图片地址">
+            <template slot-scope="scope"><a :href="scope.row.facePhotoAssay[0]" target="_blank">{{scope.row.facePhotoAssay[0] | formatSrc}}</a></template>
+          </el-table-column>
+          <el-table-column prop="facePhotoAssayMongoId[0]" align="center" label="图片MongodbID"></el-table-column>
+          <el-table-column prop="orderNo" align="center" label="活体合作方"></el-table-column>
+          <el-table-column prop="faceDownFlagDesc" align="center" width="78" label="上送状态"></el-table-column>
+          <el-table-column prop="faceDownCount" align="center" width="110" label="上送失败次数"></el-table-column>
+          <el-table-column prop="faceCreateDate" align="center" label="创建时间">
+            <template slot-scope="scope">{{scope.row.faceCreateDate | formatTime}}</template>
+          </el-table-column>
+          <el-table-column align="left" label="操作" width="100">
             <template slot-scope="scope">
               <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
             </template>
@@ -39,22 +43,27 @@
         </el-table>
 
         <!-- pagination -->
-        <el-pagination class="pagination" background layout="prev, pager, next" :current-page.sync="page" @current-change="getList" :total="total" :page-size="searchFilter.length"></el-pagination>
+        <el-pagination class="pagination" background layout="prev, pager, next" :current-page.sync="page" @current-change="getList" :total="total" :page-size="searchFilter.pageSize"></el-pagination>
       </el-card>
     </el-row>
   </div>
 </template>
 
 <script>
+import { parseTime } from 'common/tools/index'
+
 export default {
   data () {
     return {
       searchFilter: {
-        usrName: '',
-        orderId: '',
-        serialNumber: ''
+        orderNo: '', // 订单号
+        userNo: '', // 用户号
+        tranNo: '', // 交易号
+        orderFaceType: 2, // 活体类型， 1-申请， 2-借款
+        pageIndex: 1, // 第几页
+        pageSize: 20 // 分页大小
       },
-      tableLoading: false,
+      tableLoading: true,
       tableData: [],
       page: 1,
       total: 0
@@ -65,19 +74,33 @@ export default {
       console.log(this.searchFilter)
     },
     clearFilter () {
-      for (let key in this.searchFilter) {
-        this.searchFilter[key] = ''
-      }
+      this.searchFilter.orderNo = ''
+      this.searchFilter.userNo = ''
+      this.searchFilter.tranNo = ''
     },
     getList () {
       this.$http({
-        url: '/aps',
+        url: '/aps/face/queryOrderFaceDownFailList',
         methods: 'GET'
-      }).then(res => console.log(res))
+      }).then(this.handleListData)
+    },
+    handleListData ({ flag, data }) {
+      if (flag === 'S' && data) {
+        this.tableData = data.rows
+        this.total = data.total
+        this.tableLoading = false
+      }
+    },
+    handleDelete () {
+      console.log('delete~~~')
     }
   },
   mounted () {
     this.getList()
+  },
+  filters: {
+    formatSrc: (str) => (str || '').slice(0, 20) + '...',
+    formatTime: (stamp) => parseTime(stamp)
   }
 }
 </script>
