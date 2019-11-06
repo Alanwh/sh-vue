@@ -1,5 +1,5 @@
-const path = require('path');
-const resolve = (dir) => path.join(__dirname, dir);
+const path = require('path')
+const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = (config, NODE_ENV, PROJECT) => {
   config // 开启开发环境 source map
@@ -47,5 +47,5 @@ module.exports = (config, NODE_ENV, PROJECT) => {
       }
     )
 
-  config.output.filename(`${PROJECT}.[hash].js`).end(); 
+  config.output.filename(`${PROJECT}.[hash].js`).end()
 }

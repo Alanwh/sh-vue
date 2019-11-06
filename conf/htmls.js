@@ -1,4 +1,4 @@
-const constant = require('./constant');
+const constant = require('./constant')
 
 module.exports = (app) => {
   return {

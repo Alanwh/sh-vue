@@ -1,15 +1,14 @@
-const constant = require('./constant');
+const constant = require('./constant')
 const apiRoutes = require('../mock')
 
 module.exports = (PROJECT) => {
   return {
-    open: true, 
     overlay: {
       warnings: false,
       errors: true
     },
     proxy: constant.PROXY_URL[PROJECT],
-    before(app) {
+    before (app) {
       console.log(`/${PROJECT}`)
       app.use(`/${PROJECT}`, apiRoutes)
     }
