@@ -5,7 +5,7 @@ const PAGE_TITLE = {
 }
 // 不同测试服务器 ip 地址
 const PROXY_URL = {
-  'aps': 'http://10.209.33.41',
+  'aps': 'http://10.93.161.17:8080',
   'tbs': 'http://10.209.33.41',
   'lego': 'http://10.209.33.41'
 }

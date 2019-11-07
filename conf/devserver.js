@@ -9,8 +9,7 @@ module.exports = (PROJECT) => {
     },
     proxy: constant.PROXY_URL[PROJECT],
     before (app) {
-      console.log(`/${PROJECT}`)
-      app.use(`/${PROJECT}`, apiRoutes)
+      // app.use(`/${PROJECT}`, apiRoutes)
     }
   }
 }
