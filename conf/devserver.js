@@ -9,7 +9,9 @@ module.exports = (PROJECT) => {
     },
     proxy: constant.PROXY_URL[PROJECT],
     before (app) {
-      // app.use(`/${PROJECT}`, apiRoutes)
+      if (constant.USE_MOCK) {
+        app.use(`/${PROJECT}`, apiRoutes)
+      }
     }
   }
 }

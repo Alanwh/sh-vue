@@ -59,6 +59,7 @@
 
 <script>
 import { parseTime } from 'common/tools/index'
+import { FACEDOWN_LIST, RESET_COUNT } from '../helps/request_urls'
 
 export default {
   data () {
@@ -91,12 +92,12 @@ export default {
       this.tableLoading = true
       this.searchFilter.pageIndex = this.page
       this.$http
-        .post('/aps/face/queryOrderFaceDownFailList', this.searchFilter)
+        .post(FACEDOWN_LIST, this.searchFilter)
         .then(this.handleListData)
     },
     handleRetry (index, { orderFaceType, orderNo }) {
       this.$http
-        .post('/aps/face/resetOrderFaceDownCount', { orderFaceType, orderNo })
+        .post(RESET_COUNT, { orderFaceType, orderNo })
         .then(
           result => {
             if (result.flag === 'S') {

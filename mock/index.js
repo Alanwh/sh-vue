@@ -5,7 +5,7 @@ const json = require(path)
 
 const apiRoutes = express.Router()
 
-apiRoutes.get("/face/queryOrderFaceDownFailList", (req, res) => res.send(json))
-apiRoutes.post("/face/resetOrderFaceDownCount", (req, res) => res.send({"data": 1, "flag": "S"}))
+apiRoutes.post('/face/queryOrderFaceDownFailList', (req, res) => res.send(json))
+apiRoutes.post('/face/resetOrderFaceDownCount', (req, res) => res.send({ 'data': 1, 'flag': 'S' }))
 
 module.exports = apiRoutes
