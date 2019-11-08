@@ -21,9 +21,13 @@
           <el-table-column prop="userNo" label="用户号" align="center" width="120"></el-table-column>
           <el-table-column prop="orderNo" align="center" label="订单号"></el-table-column>
           <el-table-column prop="nameOcr" align="center" width="100" label="姓名"></el-table-column>
-          <el-table-column prop="idPositive|formatSrc" align="center" width="180" label="身份证正面照地址"></el-table-column>
+          <el-table-column prop="idPositive" align="center" width="180" label="身份证正面照地址">
+            <template slot-scope="scope"><a :href="scope.row.idPositive" target="_blank">{{scope.row.idPositive | formatSrc}}</a></template>
+          </el-table-column>
           <el-table-column prop="idPositiveMongoId" align="center" label="身份证正面照mongoId"></el-table-column>
-          <el-table-column prop="idNegative|formatSrc" align="center" width="180" label="身份证反面照地址"></el-table-column>
+          <el-table-column prop="idNegative" align="center" width="180" label="身份证反面照地址">
+            <template slot-scope="scope"><a :href="scope.row.idNegative" target="_blank">{{scope.row.idNegative | formatSrc}}</a></template>
+          </el-table-column>
           <el-table-column prop="idNegativeMongoId" align="center" label="身份证反面照mongoId"></el-table-column>
           <el-table-column prop="applOcrDownFlagDesc" align="center" width="78" label="上送状态"></el-table-column>
           <el-table-column prop="applOcrDownCount" align="center" width="110" label="上送失败次数"></el-table-column>

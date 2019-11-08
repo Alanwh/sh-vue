@@ -14,6 +14,11 @@ const routes = [
     path: '/abnormal_ocr',
     name: 'Abnormal_ocr',
     component: () => import(/* webpackChunkName: "Abnormal_ocr" */ '../views/abnormal_ocr')
+  },
+  {
+    path: '/order_list',
+    name: 'Order_list',
+    component: () => import(/* webpackChunkName: "Abnormal_ocr" */ '../views/order_list')
   }
 ]
 
