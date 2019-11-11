@@ -5,18 +5,18 @@
         <!-- search -->
         <el-form label-width="120px" :inline="true">
           <el-form-item label="用户号:">
-            <el-input v-model="searchFilter.userNo" style="width:200px" placeholder="请输入用户名"></el-input>
+            <el-input v-model="searchFilter.userNo" style="width:200px" placeholder="请输入用户名" />
           </el-form-item>
           <el-form-item label="订单号:">
-            <el-input v-model="searchFilter.orderNo" placeholder="请输入订单号"></el-input>
+            <el-input v-model="searchFilter.orderNo" placeholder="请输入订单号" />
           </el-form-item>
           <el-form-item label="交易流水号:">
-            <el-input v-model="searchFilter.tranNo" placeholder="请输入交易流水号"></el-input>
+            <el-input v-model="searchFilter.tranNo" placeholder="请输入交易流水号" />
           </el-form-item>
           <el-form-item label="活体类型:">
             <el-select v-model="searchFilter.orderFaceType" value="借款类型">
-              <el-option key="申请类型" label="申请类型" :value="1"></el-option>
-              <el-option key="借款类型" label="借款类型" :value="2"></el-option>
+              <el-option key="申请类型" label="申请类型" :value="1" />
+              <el-option key="借款类型" label="借款类型" :value="2" />
             </el-select>
           </el-form-item>
           <el-form-item>
@@ -27,19 +27,22 @@
 
         <!-- table -->
         <el-table v-loading="tableLoading" :data="tableData" border class="table">
-          <el-table-column prop="userNo" label="用户号" align="center" width="120"></el-table-column>
-          <el-table-column prop="orderNo" align="center" label="订单号"></el-table-column>
+          <el-table-column prop="userNo" label="用户号" align="center" width="120" />
+          <el-table-column prop="orderNo" align="center" label="订单号" />
           <el-table-column align="center" width="100" label="交易流水号">
              <template slot-scope="scope">{{scope.row.tranNo || '暂无'}}</template>
           </el-table-column>
-          <el-table-column prop="orderFaceType" align="center" width="78" label="活体类型"></el-table-column>
+          <el-table-column prop="orderFaceType" align="center" width="78" label="活体类型" />
           <el-table-column prop="facePhotoAssayList[0]" align="center" width="180" label="图片地址">
-            <template slot-scope="scope"><a :href="scope.row.facePhotoAssayList[0]" target="_blank">{{scope.row.facePhotoAssayList[0] | formatSrc}}</a></template>
+            <template slot-scope="scope">
+              <a class="link" v-if="scope.row.facePhotoAssayList[0]" :href="scope.row.facePhotoAssayList[0]" target="_blank">{{scope.row.facePhotoAssayList[0] | formatSrc}}</a>
+              <span v-else>暂无图片</span>
+            </template>
           </el-table-column>
-          <el-table-column prop="facePhotoAssayMongoIdList[0]" align="center" label="图片MongodbID"></el-table-column>
-          <el-table-column prop="orderNo" align="center" label="活体合作方"></el-table-column>
-          <el-table-column prop="faceDownFlagDesc" align="center" width="78" label="上送状态"></el-table-column>
-          <el-table-column prop="faceDownCount" align="center" width="110" label="上送失败次数"></el-table-column>
+          <el-table-column prop="facePhotoAssayMongoIdList[0]" align="center" label="图片MongodbID" />
+          <el-table-column prop="orderNo" align="center" label="活体合作方" />
+          <el-table-column prop="faceDownFlagDesc" align="center" width="78" label="上送状态" />
+          <el-table-column prop="faceDownCount" align="center" width="110" label="上送失败次数" />
           <el-table-column prop="faceCreateDate" align="center" label="创建时间">
             <template slot-scope="scope">{{scope.row.faceCreateDate | formatTime}}</template>
           </el-table-column>
@@ -51,14 +54,14 @@
         </el-table>
 
         <!-- pagination -->
-        <el-pagination class="pagination" background layout="prev, pager, next" :current-page.sync="page" @current-change="getList" :total="total" :page-size="searchFilter.pageSize"></el-pagination>
+        <el-pagination class="pagination" background layout="prev, pager, next" :current-page.sync="page" @current-change="getList" :total="total" :page-size="searchFilter.pageSize" />
       </el-card>
     </el-row>
   </div>
 </template>
 
 <script>
-import { parseTime } from 'common/tools/index'
+import { parseTime, formatSrc } from 'common/tools/index'
 import { FACEDOWN_LIST, RESET_COUNT } from '../helps/request_urls'
 
 export default {
@@ -87,6 +90,7 @@ export default {
       this.searchFilter.orderNo = ''
       this.searchFilter.userNo = ''
       this.searchFilter.tranNo = ''
+      this.searchFilter.orderFaceType = 1
     },
     getList () {
       this.tableLoading = true
@@ -127,7 +131,7 @@ export default {
     this.getList()
   },
   filters: {
-    formatSrc: (str) => (str || '').slice(0, 20) + '...',
+    formatSrc,
     formatTime: (stamp) => parseTime(stamp)
   }
 }
@@ -141,5 +145,9 @@ export default {
 .pagination{
   margin-top: 10px;
   margin-left: -10px;
+}
+.link{
+  text-decoration: none;
+  color: #409eff;
 }
 </style>

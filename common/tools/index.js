@@ -214,3 +214,14 @@ export function unique (array, type) {
   })
   return newArr
 }
+
+/**
+ * 图片地址格式化
+ */
+export function formatSrc (str) {
+  if (typeof (str) === 'string') {
+    return str.length > 20 ? str.slice(0, 20) + '...' : str.length === 0 ? '暂无图片' : str
+  } else {
+    return '暂无图片'
+  }
+}

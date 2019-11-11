@@ -19,20 +19,20 @@
             </el-select>
           </el-form-item>
           <el-form-item label="还款状态:">
-            <el-select v-model="searchFilter.iouState" value="全部">
+            <el-select v-model="searchFilter.repayStatus" value="全部">
               <el-option v-for="(item, key) of repayStateList" :key="key" :label="item.desc" :value="item.code" />
             </el-select>
           </el-form-item>
           <el-form-item label="还款类型:">
-            <el-select v-model="searchFilter.iouState" value="全部">
+            <el-select v-model="searchFilter.repayType" value="全部">
               <el-option v-for="(item, key) of repayTypeList" :key="key" :label="item.desc" :value="item.code" />
             </el-select>
           </el-form-item>
           <el-form-item label="开始时间">
-            <el-date-picker v-model="searchFilter.orderStartDate" type="date" placeholder="选择日期" />
+            <el-date-picker v-model="searchFilter.repayStartDate" type="date" placeholder="选择日期" />
           </el-form-item>
           <el-form-item label="结束时间">
-            <el-date-picker v-model="searchFilter.orderEndDate" type="date" placeholder="选择日期" />
+            <el-date-picker v-model="searchFilter.repayEndDate" type="date" placeholder="选择日期" />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="searchByFilter()">查询</el-button>
@@ -77,16 +77,11 @@ export default {
         userNo: '',
         orderNo: '',
         tranNo: '',
-        requestNo: '',
-        repayOrderNo: '',
-        partnerCode: '',
-        bankCard: '',
-        repayAmount: '',
-        repayType: '',
-        repayStateDesc: '',
-        loanReqNo: '',
-        channelLoanNo: '',
-        repayCreateDate: '',
+        channelId: 'all',
+        repayStatus: 'all',
+        repayType: 'all',
+        repayStartDate: '',
+        repayEndDate: '',
         pageIndex: 1,
         pageSize: 20
       },
@@ -108,6 +103,8 @@ export default {
       this.searchFilter.orderNo = ''
       this.searchFilter.userNo = ''
       this.searchFilter.tranNo = ''
+      this.searchFilter.repayStartDate = ''
+      this.searchFilter.repayEndDate = ''
     },
     getList () {
       this.tableLoading = true
@@ -125,7 +122,7 @@ export default {
       if (flag === 'S' && data) {
         this.repayTypeList = data.repayTypeList
         this.partnerChannelIdList = data.partnerChannelIdList
-        this.repayStateList = this.repayStateList
+        this.repayStateList = data.repayStateList
       }
     },
     handleListData ({ flag, data }) {

@@ -18,8 +18,7 @@
               <el-option v-for="(item, key) of partnerChannelIdList" :key="key" :label="item.desc" :value="item.code" />
             </el-select>
           </el-form-item>
-          <!-- 待确认 -->
-           <el-form-item label="申请状态:">
+          <el-form-item label="申请状态:">
             <el-select v-model="searchFilter.iouState" value="全部">
               <el-option v-for="(item, key) of iouStateList" :key="key" :label="item.desc" :value="item.code" />
             </el-select>
@@ -27,10 +26,10 @@
           <el-form-item label="借条动支申请号:">
             <el-input v-model="searchFilter.loanReqNo" placeholder="请输入借条动支申请号" />
           </el-form-item>
-          <el-form-item label="开始时间">
+          <el-form-item label="开始时间:">
             <el-date-picker v-model="searchFilter.orderStartDate" type="date" placeholder="选择日期" />
           </el-form-item>
-          <el-form-item label="结束时间">
+          <el-form-item label="结束时间:">
             <el-date-picker v-model="searchFilter.orderEndDate" type="date" placeholder="选择日期" />
           </el-form-item>
           <el-form-item>
@@ -42,7 +41,7 @@
         <!-- table -->
         <el-table v-loading="tableLoading" :data="tableData" border class="table">
           <el-table-column prop="userNo" label="用户号" align="center" />
-          <el-table-column prop="orderNo" label="合作方用户标识" align="center" width="120" />
+          <el-table-column prop="orderNo" label="合作方用户标识" align="center" />
           <el-table-column prop="tranNo" label="交易流水号" align="center" width="120" />
           <el-table-column prop="loanReqNo" label="借条动支申请号" align="center" />
           <el-table-column prop="partnerCode" label="合作方代码" align="center" width="120" />
@@ -72,7 +71,7 @@ export default {
     return {
       searchFilter: {
         channelId: 'all',
-        iouState: '',
+        iouState: 'all',
         loanReqNo: '',
         orderEndDate: '',
         orderNo: '',
@@ -99,6 +98,9 @@ export default {
       this.searchFilter.orderNo = ''
       this.searchFilter.userNo = ''
       this.searchFilter.tranNo = ''
+      this.searchFilter.loanReqNo = ''
+      this.searchFilter.orderStartDate = ''
+      this.searchFilter.orderEndDate = ''
     },
     getList () {
       this.tableLoading = true
