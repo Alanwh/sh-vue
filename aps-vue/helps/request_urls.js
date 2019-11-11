@@ -9,3 +9,7 @@ export const OCR_COUNT = '/aps/ocr/resetOrderOcrDownCount'
 export const ORDER_OPTION_INFO = '/aps/order/queryOrderBaseOptionInfo'
 
 export const ORDER_LIST = '/aps/order/queryOrderInfoList'
+
+export const IOU_LIST = '/aps/iou/queryOrderIouInfoList'
+
+export const IOU_OPTION_INFO = '/aps/iou/queryOrderBaseOptionInfo'
