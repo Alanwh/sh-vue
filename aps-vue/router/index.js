@@ -24,6 +24,11 @@ const routes = [
     path: '/iou_list',
     name: 'Iou_list',
     component: () => import(/* webpackChunkName: "Iou_list" */ '../views/iou_list')
+  },
+  {
+    path: '/repay_list',
+    name: 'Repay_list',
+    component: () => import(/* webpackChunkName: "Repay_list" */ '../views/repay_list')
   }
 ]
 
